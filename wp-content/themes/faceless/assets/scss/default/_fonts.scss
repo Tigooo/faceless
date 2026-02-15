@@ -1,0 +1,11 @@
+@import "_mixins/font-face";
+
+/*INTER*/
+@include font-face("Inter-Bold", "../fonts/inter/Inter-Bold");
+
+
+/*MONTSERRAT*/
+@include font-face("Montserrat-Bold", "../fonts/montserrat/Montserrat-Bold");
+@include font-face("Montserrat-Medium", "../fonts/montserrat/Montserrat-Medium");
+@include font-face("Montserrat-Regular", "../fonts/montserrat/Montserrat-Regular");
+@include font-face("Montserrat-SemiBold", "../fonts/montserrat/Montserrat-SemiBold");

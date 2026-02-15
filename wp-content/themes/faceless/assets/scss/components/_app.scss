@@ -1,0 +1,476 @@
+.header {
+    position: relative;
+
+    @media (max-width: 1024px) {
+        align-items: flex-start;
+        padding-top: 15px;
+    }
+
+    &__sub-box {
+
+        @media (max-width: 1024px) {
+            border-radius: 0;
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+            border: none;
+        }
+    }
+
+    &__sub-menurow-mobile {
+        display: none;
+
+        @media (max-width: 1024px) {
+            display: flex;
+            background: transparent;
+        }
+    }
+
+    &__submenu-btn {
+
+        @media (max-width: 1024px) {
+            border-radius: 999px;
+        }
+    }
+
+    &__sub-image {
+
+        @media (max-width: 1024px) {
+            width: 100%;
+            padding: 0;
+        }
+    }
+
+    &__sub-menucontent {
+        display: none;
+
+        @media (max-width: 1024px) {
+            order: 2;
+            flex-wrap: wrap;
+        }
+
+        &--active {
+            display: flex;
+        }
+    }
+
+    &__sub-creators {
+
+        @media (max-width: 1024px) {
+            display: none;
+        }
+    }
+
+    &__sub-menurow {
+
+        @media (max-width: 1024px) {
+            order: 1;
+            display: none;
+        }
+    }
+
+    &__sub-footer {
+
+        @media (max-width: 1024px) {
+            order: 3;
+            background: transparent;
+            flex-direction: column;
+            align-items: flex-start;
+
+            &>div {
+                width: 100%;
+            }
+
+            &>a {
+                width: 100%;
+                margin-top: 15px;
+            }
+        }
+    }
+
+    &__submenu-content-grid {
+
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+
+            svg {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__submenu-icon {
+        background-color: color-mix(in srgb, var(--icon-color) 7%, transparent);
+
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    &__row {
+        min-height: 64px;
+        transition: all 0.2s ease;
+
+        @media (max-width: 1024px) {
+            align-items: flex-start;
+            padding-top: 15px;
+            flex-wrap: wrap;
+            height: 65px;
+            overflow: hidden;
+
+            &--active {
+                height: auto;
+            }
+        }
+    }
+ 
+    &__navs  {
+       
+         @media (max-width: 1024px) {
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+    }
+    
+    &__logo {
+        height: 36px;
+
+        img {
+            height: 36px;
+        }
+
+        @media (max-width: 1024px) {
+            order: 1;
+            width: calc(100% - 36px);
+        }
+    }
+    
+
+    &__nav {
+
+        ul {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+
+            li {
+                position: relative;
+
+                &>a {
+                    padding: 8px 16px;
+                    font-size: 14px;
+                    color: hsl(var(--muted-foreground));
+                    border-radius: var(--radius);
+                    line-height: 1.25rem;
+
+                    &:hover {
+                        background-color: hsl(var(--muted) / .5);
+                    }
+
+                    @media (max-width: 1024px) {
+                        padding: 12px 8px;
+                        display: block;
+                    }
+                }
+
+                @media (max-width: 1024px) {
+                    width: 100%;
+                }
+            }
+
+            li.menu-item-has-children {
+
+                &::before {
+                    content: '';
+                    width: 16px;
+                    height: 16px;
+                    background-image: url("data:image/svg+xml;utf8,\
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>\
+                    <path d='m6 9 6 6 6-6'/>\
+                    </svg>");
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 16px;
+                    position: absolute;
+                    right: 5px;
+                    top: 12px;
+                    transform: translate(0, -50%);
+                    color: hsl(var(--muted-foreground));
+                }
+
+
+                &>a {
+                    padding-right: 25px;
+                }
+            }
+
+            @media (max-width: 1024px) {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: 15px;
+                padding-top: 15px;
+                border-top: 1px solid #dcdce5;
+                gap: 8px;
+                
+            }
+        }
+
+        @media (max-width: 1024px) {
+            order: 3;
+            width: 100%;
+            max-height: calc(100vh - 64px);
+            overflow: auto;
+        }
+    }
+
+    &__sub-menu {
+        position: absolute;
+        top: 50px;
+        left: -300px;
+        transform: scale(0);
+        transition: all 0.2s ease;
+        width: 900px;
+
+        &--show {
+            transform: scale(1);
+
+            @media  (max-width: 1024px) {
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            position: static;
+            height: 0;
+            width: 100%;
+
+            &--show {
+                height: auto;
+            }
+        }
+    }
+
+    &__burgerbtn {
+        @media (max-width: 1024px) {
+            order: 2;
+            width: 36px;
+        }
+
+    }
+
+   
+
+    &__burgerbtn-box {
+        display: none;
+
+        &--show {
+            display: block;
+        }
+    }
+
+    &__mobilemenu {
+        width: 100%;
+    }
+
+    &__btn {
+
+        @media (max-width: 1024px) {
+            display: none;
+            order: 4;
+        }
+    }
+
+    &__submenu {
+        transform: scale(0);
+        transition: all 0.1s ease;
+
+        &--show {
+            transform: scale(1);
+            transition: all 0.1s ease;
+
+        }
+
+        &-btn {
+            color: hsl(var(--foreground));
+
+            &:hover {
+                background-color: color-mix(in srgb, var(--icon-color) 100%, transparent);
+                color: #fff;
+            }
+
+
+            &--active {
+                background-color: color-mix(in srgb, var(--icon-color) 100%, transparent);
+                color: white;
+            }
+        }
+
+        &-content {
+            display: none;
+
+            &--active {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            position: static;
+            top: 0;
+            left: 0;
+        }
+    }
+    
+}
+
+.footer {
+
+    &__logo {
+        height: 41px;
+
+        img {
+            height: 41px;
+            width: auto;
+        }
+    }
+}
+
+.home {
+    
+    &__carousel {
+        overflow: hidden;
+    }
+}
+
+.hero {
+
+    &__badge-icon {
+        
+        svg {
+            width: 16px;
+            height: 16px;
+            fill: #fff;
+        }
+    }
+
+    &__banner-icon {
+        
+        svg {
+            width: 28px;
+            height: 28px;
+            fill: #fff;
+        }
+    }
+
+    &__itmes-icon {
+
+        svg {
+            width: 28px;
+            height: 28px;
+            stroke: #fff;
+        } 
+    }
+
+}
+
+/* Wrapper */
+.subscribe-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+
+    br {
+        display: none;
+    }
+
+    .wpcf7-spinner {
+        margin: 0;
+        position: absolute;
+        right: 0;
+        top: 15px;
+    }
+}
+
+@media (min-width: 640px) {
+    .subscribe-wrapper {
+        flex-direction: row;
+    }
+}
+
+/* Input wrapper */
+.subscribe-input-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+/* Icon inside input */
+.subscribe-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    stroke: #9ca3af;
+    fill: none;
+    stroke-width: 2;
+}
+
+/* Input */
+.subscribe-input {
+    width: 100%;
+    height: 56px;
+    padding: 0 16px 0 48px;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.5);
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.subscribe-input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99,102,241,0.2);
+}
+
+/* Button */
+.subscribe-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 56px;
+    padding: 0 32px;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(90deg, #5bc0eb 0%, #d946ef 100%);
+    transition: all 0.3s ease;
+}
+
+.subscribe-button:hover {
+    opacity: 0.95;
+    transform: scale(1.02);
+}
+
+
+/* Arrow */
+.subscribe-arrow {
+    width: 16px;
+    height: 16px;
+    stroke: #fff;
+    fill: none;
+    stroke-width: 2;
+    transition: transform 0.3s ease;
+}
+
+.subscribe-button:hover .subscribe-arrow {
+    transform: translateX(4px);
+}
