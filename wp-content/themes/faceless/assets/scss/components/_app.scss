@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .header {
     position: relative;
 
@@ -430,6 +434,12 @@
     font-size: 16px;
     outline: none;
     transition: all 0.3s ease;
+
+    &--small {
+        padding: 0 16px;
+        height: 40px;
+        background: rgb(242 243 246);
+    }
 }
 
 .subscribe-input:focus {
@@ -453,6 +463,13 @@
     color: #fff;
     background: linear-gradient(90deg, #5bc0eb 0%, #d946ef 100%);
     transition: all 0.3s ease;
+
+    &--small {
+        height: 40px;
+        border-radius: 999px;
+        font-size: 16px;
+        padding: 0 20px;
+    }
 }
 
 .subscribe-button:hover {
@@ -473,4 +490,76 @@
 
 .subscribe-button:hover .subscribe-arrow {
     transform: translateX(4px);
+}
+
+.single {
+
+    &__recomendet-icon {
+        
+        svg {
+            width: 22px;
+            height: 22px;
+
+            path {
+
+                stroke: #22c3c3;
+                fill: #22c3c3;
+            }
+        }
+    }
+
+    &__icon {
+
+       svg {
+            width: 22px;
+            height: 22px;
+        } 
+
+        &-white {
+            
+            svg {
+                path {
+
+                    stroke: #fff;
+                    fill: #fff;
+                }
+            }
+        }
+
+        &-cyan {
+            
+            svg {
+                path {
+
+                    stroke: #22c3c3;
+                    fill: #22c3c3;
+                }
+            }
+        }
+    }
+}
+
+.single__faqs {
+
+    &-icon {
+        
+        svg {
+            width: 24px;
+            height: 24px;
+
+            path {
+
+                stroke: #fff;
+                fill: #fff;
+            }
+        } 
+    }
+
+    &-content {
+        display: none;
+
+        &-show {
+            display: block;
+        }
+    }
 }
