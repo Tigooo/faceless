@@ -564,7 +564,7 @@
                                         <div class="my-8 inline-flex w-full" style="opacity: 1; transform: none;">
                                             <div  class="w-full group relative bg-white/70 dark:bg-card/50 backdrop-blur-sm rounded-xl border border-border/50 p-4 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 ">
                                                 <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-accent/5 to-secondary/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                                <div class="relative z-10 flex items-center justify-between gap-4">
+                                                <div class="wrap-mobile relative z-10 flex items-center justify-between gap-4">
                                                     <div class="flex items-center gap-3">
                                                         <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

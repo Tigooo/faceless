@@ -1,8 +1,8 @@
-<?php get_header(); ?> 
+<?php get_header(); ?>
 
 <div class="main section content">
     <section class="section">
-        <div class="container">
+        <div class="container-full">
             <div class="row d-flex justify-content-center page-404">
                 <?php 
                     $title = get_field('title', 'options');
@@ -11,15 +11,25 @@
                 ?>
                 <div class="col-sm-6">
                     <?php if($title):?>
-                    <h1 class="page-404__title"><?php echo $title;?></h1>
+                        <h1 class="page-404__title"><?php echo $title;?></h1>
+                    <?php else: ?>
+                        <h1 class="page-404__title">Page not found</h1>
                     <?php endif;?>
+
                     <?php if($description):?>
-                    <h2 class="page-404__text"><?php echo $description;?></h2>
+                        <h2 class="page-404__text"><?php echo $description;?></h2>
+                    <?php else: ?>
+                        <h2 class="page-404__text">Sorry, we cannot find the page you requested.</h2>
                     <?php endif;?>
+
                     <?php if($button_text):?>
-                    <div class="page-404__btn">
-                        <a href="<?php echo esc_url(home_url()); ?>" class="btn"><?php echo $button_text;?></a>
-                    </div>
+                        <div class="page-404__btn">
+                            <a href="<?php echo esc_url(home_url()); ?>" class="btn"><?php echo $button_text;?></a>
+                        </div>
+                    <?php else: ?>
+                        <div class="page-404__btn">
+                            <a href="<?php echo esc_url(home_url()); ?>" class="btn">Home</a>
+                        </div>
                     <?php endif;?>
                 </div>
             </div>

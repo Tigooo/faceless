@@ -108,6 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 
+	onYouTubeIframeAPIReady()
+
 	//COPY TEXT IN INNER TEXT EDITOR
 	document.querySelectorAll('.copyInerText').forEach((btn) => {
 		btn.addEventListener('click', function () {
@@ -181,25 +183,57 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	});
 
-	//SINGLE POST TABLE OF CONTENT
+	//COPY TOOL URL IN SINGLE TOOL PAGE
+	document.querySelectorAll('.copyToolLink').forEach((btn) => {
+		btn.addEventListener('click', function () {
+			const url = btn.dataset.url;
+
+			const copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy w-4 h-4 text-muted-foreground hover:text-foreground"> <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect> <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"> </path> </svg>`;
+			const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4"><path d="M20 6 9 17l-5-5"></path></svg>`;
+
+			const showCheck = () => {
+				btn.innerHTML = checkIcon;
+				setTimeout(() => { btn.innerHTML = copyIcon; }, 2000);
+			};
+
+			if (navigator.clipboard && navigator.clipboard.writeText) {
+				navigator.clipboard.writeText(url).then(showCheck);
+			} else {
+				const textarea = document.createElement('textarea');
+				textarea.value = url;
+				textarea.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+				document.body.appendChild(textarea);
+				textarea.focus();
+				textarea.select();
+				try { document.execCommand('copy'); showCheck(); } catch (e) {}
+				document.body.removeChild(textarea);
+			}
+		});
+	});
+
+	// SINGLE POST TABLE OF CONTENT
 	const content = document.querySelector('.single__content');
-    const tocList = document.querySelectorAll('.tableOfContent');
-    if (!content || !tocList.length) return;
+	const tocList = document.querySelectorAll('.tableOfContent');
+	let headings = [];
 
-    const headings = content.querySelectorAll('h2, h3, h4');
-    if (!headings.length) return;
+	if (content && tocList.length) {
 
-    // Генерируем id для заголовков
-    headings.forEach((heading, index) => {
-        if (!heading.id) {
-            heading.id = heading.textContent
-                .trim()
-                .toLowerCase()
-                .replace(/[^\w\s-]/g, '')
-                .replace(/\s+/g, '-')
-                .replace(/-+/g, '-') || 'heading-' + index;
-        }
-    });
+		headings = content.querySelectorAll('h2, h3, h4');
+
+		if (headings.length) {
+			headings.forEach((heading, index) => {
+				if (!heading.id) {
+					heading.id = heading.textContent
+						.trim()
+						.toLowerCase()
+						.replace(/[^\w\s-]/g, '')
+						.replace(/\s+/g, '-')
+						.replace(/-+/g, '-') || 'heading-' + index;
+				}
+			});
+		}
+
+	}
 
     // Заполняем каждый TOC блок
     tocList.forEach(toc => {
@@ -273,6 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 
+	
 });
 
 
@@ -351,6 +386,152 @@ jQuery(document).ready(function ($) {
 	
 	})
 
+	//SINGLE TOOL FAQ ITEM CLICK
+	$(document).on('click', '.tool__faq-btn', function () {
+
+		const item = $(this).closest('.border');
+		const content = item.find('.tool__faq-text');
+
+		if (!item.hasClass('open')) {
+			$('.tool__faq-text').slideUp(50);
+			$('.border').removeClass('open');
+		}
+
+		content.stop().slideToggle(50);
+		item.toggleClass('open');
+
+	});
+
+	// AUTHOR PAGE LOAD MORE POSTS
+	$(document).on("click", "#more button", function () {
+
+		const btn = $(this);
+		const moreButton = btn.data('href');
+
+		// Валидация URL — только относительные или с того же домена
+		if (!moreButton || (!moreButton.startsWith('/') && !moreButton.startsWith(window.location.origin))) {
+			console.warn('Invalid URL');
+			return;
+		}
+
+		btn.prop('disabled', true); // Защита от двойного клика
+		$('#postsLoader').html("<div class='main-loader main-loader--author'></div>");
+
+		const container = $("#authorPosts");
+		const more = $("#more");
+
+		$.ajax({
+			type: 'GET',
+			url: moreButton,
+			dataType: 'html',
+			timeout: 10000, // 10 сек таймаут
+			success: function (result) {
+				const $result = $(result);
+				const items = $result.find("#authorPosts").html();
+				const newMore = $result.find("#more").html();
+
+				if (items) container.append(items);
+				if (newMore) more.html(newMore);
+			},
+			error: function (xhr, status) {
+				console.error('Load more failed:', status);
+				more.html('<p>Something went wrong. Please try again.</p>');
+			},
+			complete: function () {
+				$('#postsLoader').html('');
+				btn.prop('disabled', false);
+			}
+		});
+	});
+
+	// TOOLS PAGE LOAD MORE POSTS
+	$(document).on("click", "#toolsMore button", function () {
+
+		const btn = $(this);
+		const moreButton = btn.data('href');
+
+		// Валидация URL — только относительные или с того же домена
+		if (!moreButton || (!moreButton.startsWith('/') && !moreButton.startsWith(window.location.origin))) {
+			console.warn('Invalid URL');
+			return;
+		}
+
+		btn.prop('disabled', true); // Защита от двойного клика
+		$('#postsLoader').html("<div class='main-loader main-loader--author'></div>");
+
+		const container = $("#tools");
+		const more = $("#toolsMore");
+
+		$.ajax({
+			type: 'GET',
+			url: moreButton,
+			dataType: 'html',
+			timeout: 10000, // 10 сек таймаут
+			success: function (result) {
+				const $result = $(result);
+				const items = $result.find("#tools").html();
+				const newMore = $result.find("#toolsMore").html();
+
+				if (items) container.append(items);
+				if (newMore) more.html(newMore);
+			},
+			error: function (xhr, status) {
+				console.error('Load more failed:', status);
+				more.html('<p>Something went wrong. Please try again.</p>');
+			},
+			complete: function () {
+				$('#postsLoader').html('');
+				btn.prop('disabled', false);
+			}
+		});
+	});
+
+	//CONTACT FORM RADIO CLICK
+	function setInquiryValue() {
+		const activeText = $('.cform__radio.border-primary h3').text().trim();
+		$('.WhatBringsYouHere').val(activeText);
+	}
+
+	// При загрузке
+	setInquiryValue();
+	$('.cform__radio:not(.border-primary) .cform__check').hide();
+
+	$(document).on('click', '.cform__radio', function () {
+
+		// Сброс всех
+		$('.cform__radio')
+			.removeClass('bg-gradient-subtle border-primary shadow-gradient')
+			.addClass('bg-muted/30 border-transparent hover:border-border hover:bg-muted/50');
+
+		$('.cform__radio .inline-flex')
+			.removeClass('bg-gradient-main')
+			.addClass('bg-gradient-subtle group-hover:scale-110');
+
+		$('.cform__radio .inline-flex svg')
+			.removeClass('text-primary-foreground')
+			.addClass('text-primary');
+
+		$('.cform__radio .cform__check').hide();
+
+		// Активный
+		$(this)
+			.removeClass('bg-muted/30 border-transparent hover:border-border hover:bg-muted/50')
+			.addClass('bg-gradient-subtle border-primary shadow-gradient');
+
+		$(this).find('.inline-flex')
+			.removeClass('bg-gradient-subtle group-hover:scale-110')
+			.addClass('bg-gradient-main');
+
+		$(this).find('.inline-flex svg')
+			.removeClass('text-primary')
+			.addClass('text-primary-foreground');
+
+		$(this).find('.cform__check').show();
+
+		const selectedText = $(this).find('h3').text().trim();
+    	$('.WhatBringsYouHere').val(selectedText);
+
+	});
 })
 
 

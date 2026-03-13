@@ -19,6 +19,8 @@ require get_template_directory() . '/inc/support.php';
 require get_template_directory() . '/inc/enqueue-script-style.php';
 require get_template_directory() . '/inc/acf.php';
 require get_template_directory() . '/inc/menu.php';
+require get_template_directory() . '/inc/post-types.php';
+require get_template_directory() . '/inc/custom-taxonomies.php';
 require get_template_directory() . '/inc/site-functions.php';
 
 

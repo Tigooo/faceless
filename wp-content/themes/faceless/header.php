@@ -20,7 +20,7 @@
                     $logo = get_field('logo', 'options');
                     if($logo):
                 ?>
-                <a href="#" class="header__logo flex items-center gap-2.5">
+                <a href="<?php echo get_home_url();?>" class="header__logo flex items-center gap-2.5">
                     <img src="<?php echo $logo['url'];?>" alt="<?php echo $logo['alt'];?>">
                 </a>
                 <?php endif;?>

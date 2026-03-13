@@ -12,4 +12,8 @@ function template_script_style() {
         true
     );
     wp_enqueue_script( 'scripts', get_template_directory_uri() . '/assets/js/scripts.min.js', array(), null, true );
+    
+    if ( is_singular('tools') ) {
+        wp_enqueue_script( 'calculators-scripts', get_template_directory_uri() . '/assets/js/calculators.js', array(), null, true );
+    }
 }
